@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context="com.itemhunter.main.Profile">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/change_password"
+        android:id="@+id/change_password"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_alignEnd="@+id/userProfile"
+        android:layout_below="@+id/userProfile" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/change_email"
+        android:id="@+id/change_email"
+        android:layout_below="@+id/change_password"
+        android:layout_alignLeft="@+id/change_password"
+        android:layout_alignStart="@+id/change_password"
+        android:layout_marginTop="25dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/change_location"
+        android:id="@+id/change_location"
+        android:layout_alignLeft="@+id/change_email"
+        android:layout_alignStart="@+id/change_email"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/change_email" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home"
+        android:id="@+id/profback"
+        android:layout_marginBottom="30dp"
+        android:onClick="backToFeed"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/user_profile"
+        android:id="@+id/userProfile"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/passSwitch"
+        android:layout_alignBottom="@+id/change_password"
+        android:layout_alignRight="@+id/profback"
+        android:clickable="true"
+        android:minHeight="25dp"
+        android:minWidth="25dp"
+        android:onClick="showPword"
+        android:contentDescription="@string/plus_sign_open"
+        android:background="@drawable/plussign" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/change_password"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/changePassLay"
+        android:visibility="gone">
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/changePassText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:editable="true"
+            android:enabled="true"
+            android:password="true"
+            android:layout_marginTop="8dp"
+            android:layout_alignBottom="@+id/passButt"
+            android:layout_marginLeft="20dp" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:id="@+id/passButt"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="changePassword"
+            android:layout_marginTop="8dp"
+            android:text="@string/reset"
+            android:layout_marginRight="8dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:id="@+id/changeEmaiLay"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/change_email"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:id="@+id/changeEmaiText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:editable="true"
+            android:enabled="true"
+            android:password="true"
+            android:layout_marginTop="8dp"
+            android:layout_alignBottom="@+id/profileButt"
+            android:layout_marginLeft="20dp"
+            android:inputType="textEmailAddress" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:id="@+id/profileButt"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="changeEmail"
+            android:layout_marginTop="8dp"
+            android:text="@string/reset"
+            android:layout_marginRight="8dp" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emaiSwitch"
+        android:clickable="true"
+        android:minHeight="25dp"
+        android:minWidth="25dp"
+        android:onClick="showEmail"
+        android:contentDescription="@string/plus_sign_open"
+        android:background="@drawable/plussign"
+        android:layout_alignBottom="@+id/change_email"
+        android:layout_alignLeft="@+id/passSwitch" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:id="@+id/changeLocaLay"
+        android:visibility="gone"
+        android:layout_below="@+id/change_location"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/changeLocaText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:editable="true"
+            android:enabled="true"
+            android:password="true"
+            android:layout_marginTop="8dp"
+            android:layout_alignBottom="@+id/locaButt"
+            android:layout_marginLeft="20dp" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:id="@+id/locaButt"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="changeLocation"
+            android:layout_marginTop="8dp"
+            android:text="@string/reset"
+            android:layout_marginRight="8dp" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locaSwitch"
+        android:clickable="true"
+        android:minHeight="25dp"
+        android:minWidth="25dp"
+        android:onClick="showLoca"
+        android:contentDescription="@string/plus_sign_open"
+        android:background="@drawable/plussign"
+        android:layout_alignBottom="@+id/change_location"
+        android:layout_alignLeft="@+id/passSwitch" />
+
+</RelativeLayout>

@@ -15,5 +15,6 @@
     <string name="ok">OK</string>
     <string name="plus_sign_open">Plus Sign (Open)</string>
     <string name="reset">Reset</string>
+    <string name="force_content_sync">Force Content Sync</string>
 
 </resources>

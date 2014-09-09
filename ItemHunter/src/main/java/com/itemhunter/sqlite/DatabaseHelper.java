@@ -16,13 +16,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(AppConstants.CREATE_SQL_TABLE_PROFILE);
 		db.execSQL(AppConstants.CREATE_SQL_TABLE_PINGS);
 		db.execSQL(AppConstants.CREATE_SQL_TABLE_LISTINGS);
-
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

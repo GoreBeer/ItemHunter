@@ -221,4 +221,13 @@
         android:layout_alignBottom="@+id/change_location"
         android:layout_alignLeft="@+id/passSwitch" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/force_content_sync"
+        android:id="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/profback"
+        android:layout_marginBottom="20dp" />
+
 </RelativeLayout>

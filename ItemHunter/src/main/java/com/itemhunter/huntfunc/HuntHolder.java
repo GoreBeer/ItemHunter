@@ -7,6 +7,10 @@ import java.util.concurrent.TimeUnit;
 
 import com.itemhunter.objects.GenericHunt;
 
+    /**
+     * Huntholder provides the main functionality for the
+     */
+
 public class HuntHolder {
 	
 	protected ArrayList<GenericHunt> pingsHolder;	

@@ -1,11 +1,14 @@
 package com.itemhunter.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.itemhunter.sqlite.AppConstants;
 
 
 public class Home extends ActionBarActivity {
@@ -14,6 +17,8 @@ public class Home extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        checkLocations();
     }
 
 
@@ -37,6 +42,18 @@ public class Home extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //This checks to see if the user has set any locations
+    private void checkLocations(){
+
+        SharedPreferences userProf = getSharedPreferences(AppConstants.USERPREFS, 0);
+        SharedPreferences.Editor editor = userProf.edit();
+        if(!userProf.contains(AppConstants.LOCATIONS))
+            editor.putString(AppConstants.LOCATIONS, "Australia|New Zealand");
+            //TODO - Call to run a popup asking user for location?
+
+        editor.commit();
+    }
+
     public void goOptions(View view){
         Intent proIntent = new Intent(this, Profile.class);
         startActivity(proIntent);
@@ -46,5 +63,7 @@ public class Home extends ActionBarActivity {
         Intent hunIntent = new Intent(this, NewHunt.class);
         startActivity(hunIntent);
     }
+
+
 
 }

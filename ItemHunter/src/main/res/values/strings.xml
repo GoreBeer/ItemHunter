@@ -7,8 +7,8 @@
     <string name="change_password">Change Password: </string>
     <string name="change_email">Change Email: </string>
     <string name="change_location">Change Location: </string>
-    <string name="profile">Profile</string>
     <string name="home">Home</string>
+    <string name="profile">Profile</string>
     <string name="user_profile">User Profile</string>
     <string name="enter_password">Enter your new password</string>
     <string name="confirm">Confirm</string>
@@ -16,5 +16,28 @@
     <string name="plus_sign_open">Plus Sign (Open)</string>
     <string name="reset">Reset</string>
     <string name="force_content_sync">Force Content Sync</string>
+    <string name="new_hunt">New Hunt</string>
+    <string name="search_text">Search Text: </string>
+    <string name="price_text">Price: </string>
+    <string name="maximum">Maximum</string>
+    <string name="dollar">$</string>
+    <string name="website">Website: </string>
+    <string name="myLoc_text">Location: </string>
+    <string name="more_options">More Options</string>
+    <string name="minimum">Minimum</string>
+    <string name="searchType">Search Type: </string>
+    <string name="pingEvery">Ping Every: </string>
+    <string name="minutes">Minutes</string>
+    <string name="notifTypes">Notification Types: </string>
+    <string name="email">Email </string>
+    <string name="pusht">Push </string>
+    <string name="onlySearchWifi_text">Only Search Wi-Fi: </string>
+    <string name="create">Create</string>
+
+    <string-array name="websites">
+        <item>Ebay</item>
+        <item>Amazon</item>
+        <item>Both</item>
+    </string-array>
 
 </resources>

@@ -23,6 +23,13 @@
                 <action android:name="android.intent.action.VIEW"></action>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NewHunt"
+            android:label="NewHunt">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"></action>
+            </intent-filter>
+            </activity>
 
     </application>
 

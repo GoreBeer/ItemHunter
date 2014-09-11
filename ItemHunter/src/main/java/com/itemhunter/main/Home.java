@@ -42,4 +42,9 @@ public class Home extends ActionBarActivity {
         startActivity(proIntent);
     }
 
+    public void goNewHunt(View view){
+        Intent hunIntent = new Intent(this, NewHunt.class);
+        startActivity(hunIntent);
+    }
+
 }

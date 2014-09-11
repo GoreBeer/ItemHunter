@@ -25,4 +25,14 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_hunt"
+        android:id="@+id/newHuntButt"
+        android:layout_below="@+id/profileButt"
+        android:layout_alignRight="@+id/profileButt"
+        android:layout_alignEnd="@+id/profileButt"
+        android:onClick="goNewHunt" />
+
 </RelativeLayout>

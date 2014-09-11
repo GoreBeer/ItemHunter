@@ -1,19 +1,26 @@
 package com.itemhunter.main;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
+import com.itemhunter.sqlite.AppConstants;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Kyle on 9/09/2014.
  */
 public class NewHunt extends ActionBarActivity {
-    protected ArrayList<String> websites = new ArrayList<String>();
-    protected ArrayList<String> locations = new ArrayList<String>();
+    protected List<String> locations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +34,23 @@ public class NewHunt extends ActionBarActivity {
         spinner.setAdapter(adapter);
 
         //Gets the user preferences and sets the location automatically, also allows worldwide selection
+        System.out.println("Checking user preferences");
+        SharedPreferences userpref = getSharedPreferences(AppConstants.USERPREFS, 0);
+        String locs = userpref.getString("locations", "none");
+        System.out.println("Sharedprefs open, locations are: " + locs);
+        if(!locs.equalsIgnoreCase("none")){
+            locations = Arrays.asList(locs.split("|"));
+            System.out.println("I am not none");
+        }
+        else {
+            locations = new ArrayList<String>();
+        }
+        locations.add("World");
+
         Spinner spin = (Spinner)findViewById(R.id.locationspin);
-        //ArrayAdapter<CharSequence> adapt = ArrayAdapter.createFromResource(this,)
+        ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locations);
+        adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(adapt);
     }
 
     @Override
@@ -43,5 +65,20 @@ public class NewHunt extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void showMore(View view){
+        RelativeLayout moreOp = (RelativeLayout)findViewById(R.id.moreOpts);
+        if(moreOp.isShown()){
+            moreOp.setVisibility(View.GONE);
+            view.setBackgroundResource(R.drawable.plussign);
+        }
+        else{
+            moreOp.setVisibility(View.VISIBLE);
+            view.setBackgroundResource(R.drawable.negsign);
+        }
+    }
 
+    public void goHome(View view){
+        Intent homeIntent = new Intent(this, Home.class);
+        startActivity(homeIntent);
+    }
 }

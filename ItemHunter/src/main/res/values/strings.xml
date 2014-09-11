@@ -23,6 +23,7 @@
     <string name="dollar">$</string>
     <string name="website">Website: </string>
     <string name="myLoc_text">Location: </string>
+    <string name="edit_loc">Edit My Locations</string>
     <string name="more_options">More Options</string>
     <string name="minimum">Minimum</string>
     <string name="searchType">Search Type: </string>
@@ -30,9 +31,12 @@
     <string name="minutes">Minutes</string>
     <string name="notifTypes">Notification Types: </string>
     <string name="email">Email </string>
-    <string name="pusht">Push </string>
+    <string name="push">Push </string>
     <string name="onlySearchWifi_text">Only Search Wi-Fi: </string>
     <string name="create">Create</string>
+    <string name="fixed_price">Fixed Price</string>
+    <string name="auction">Auction</string>
+    <string name="wifi_true">True</string>
 
     <string-array name="websites">
         <item>Ebay</item>

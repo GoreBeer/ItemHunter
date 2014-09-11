@@ -92,5 +92,11 @@ public class AppConstants {
 	//listings
 	public static final String SELECT_ALL_LISTINGS = "SELECT * FROM " + LISTINGS;
 	public static final String SELECT_LISTING_BY_ID = SELECT_ALL_LISTINGS + " WHERE " + UPDATE_ON_KEY_ID;
-	public static final String SELECT_LISTINGS_ATTR_BY_ID = "SELECT ? FROM " + LISTINGS + " WHERE " + UPDATE_ON_KEY_ID;	
+	public static final String SELECT_LISTINGS_ATTR_BY_ID = "SELECT ? FROM " + LISTINGS + " WHERE " + UPDATE_ON_KEY_ID;
+
+    //SharedPreferences File Names
+    public static final String USERPREFS = "User_Prefs";
+
+    //SharedPreferences Keys
+    public static final String LOCATIONS = "locations";
 }

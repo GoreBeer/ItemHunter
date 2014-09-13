@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import com.itemhunter.sqlite.AppConstants;
@@ -66,7 +67,7 @@ public class NewHunt extends ActionBarActivity {
     }
 
     public void showMore(View view){
-        RelativeLayout moreOp = (RelativeLayout)findViewById(R.id.moreOpts);
+        ScrollView moreOp = (ScrollView)findViewById(R.id.moreOptsScroll);
         if(moreOp.isShown()){
             moreOp.setVisibility(View.GONE);
             view.setBackgroundResource(R.drawable.plussign);

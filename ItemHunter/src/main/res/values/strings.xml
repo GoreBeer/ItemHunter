@@ -23,7 +23,7 @@
     <string name="dollar">$</string>
     <string name="website">Website: </string>
     <string name="myLoc_text">Location: </string>
-    <string name="edit_loc">Edit My Locations</string>
+    <string name="add_loc">Add Locations</string>
     <string name="more_options">More Options</string>
     <string name="minimum">Minimum</string>
     <string name="searchType">Search Type: </string>

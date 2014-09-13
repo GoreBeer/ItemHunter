@@ -47,9 +47,12 @@ public class Home extends ActionBarActivity {
 
         SharedPreferences userProf = getSharedPreferences(AppConstants.USERPREFS, 0);
         SharedPreferences.Editor editor = userProf.edit();
+        //If sharedpreferences doesn't have a key (aka it's the first time using the app) then
+        //ask for location of country by user.  How to present the country list?
         if(!userProf.contains(AppConstants.LOCATIONS))
-            editor.putString(AppConstants.LOCATIONS, "Australia|New Zealand");
-            //TODO - Call to run a popup asking user for location?
+            //Temporarily setting static for testing
+            editor.putString(AppConstants.LOCATIONS, "World|Australia|New Zealand");
+            //TODO - Call to run a popup asking user for location
 
         editor.commit();
     }

@@ -1,5 +1,6 @@
 package com.itemhunter.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,21 +8,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+
+import com.countrypicker.CountryPickerListener;
+import com.countrypicker.CountryPicker;
 import com.itemhunter.sqlite.AppConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Kyle on 9/09/2014.
  */
 public class NewHunt extends ActionBarActivity {
-    protected List<String> locations;
+    protected ArrayList<String> locations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +38,12 @@ public class NewHunt extends ActionBarActivity {
         spinner.setAdapter(adapter);
 
         //Gets the user preferences and sets the location automatically, also allows worldwide selection
-        System.out.println("Checking user preferences");
         SharedPreferences userpref = getSharedPreferences(AppConstants.USERPREFS, 0);
-        String locs = userpref.getString("locations", "none");
-        System.out.println("Sharedprefs open, locations are: " + locs);
-        if(!locs.equalsIgnoreCase("none")){
-            locations = Arrays.asList(locs.split("|"));
-            System.out.println("I am not none");
-        }
-        else {
-            locations = new ArrayList<String>();
-        }
-        locations.add("World");
+        String locs = userpref.getString(AppConstants.LOCATIONS, "none");
 
+        //Add user chosen locations to the spinner.  User location defaults to World if none are chosen.
+        locations = new ArrayList<String>(Arrays.asList(locs.split("\\|")));
+        System.out.println("Locations successfully split");
         Spinner spin = (Spinner)findViewById(R.id.locationspin);
         ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locations);
         adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -81,5 +77,36 @@ public class NewHunt extends ActionBarActivity {
     public void goHome(View view){
         Intent homeIntent = new Intent(this, Home.class);
         startActivity(homeIntent);
+    }
+
+    public void editLocations(View view){
+        CountryPicker country = CountryPicker.newInstance("Choose your locations");
+        country.show(getSupportFragmentManager(), "COUNTRY_PICKER");
+
+        country.setListener(new CountryPickerListener() {
+            @Override
+            public void onSelectCountry(String name, String code) {
+                SharedPreferences userpref = getSharedPreferences(AppConstants.USERPREFS, 0);
+                String locs = userpref.getString(AppConstants.LOCATIONS, "none");
+
+                String newLocs = locs + "|"+name;
+                SharedPreferences.Editor edit = userpref.edit();
+                edit.putString(AppConstants.LOCATIONS, newLocs);
+
+                Context context = getApplicationContext();
+                CharSequence text = name+" added to locations";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                locations.add(name);
+
+                Spinner spin = (Spinner)findViewById(R.id.locationspin);
+                ArrayAdapter<String> adapt = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, locations);
+                adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spin.setAdapter(adapt);
+            }
+        });
     }
 }

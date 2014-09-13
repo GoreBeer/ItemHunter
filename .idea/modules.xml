@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ItemHunter.iml" filepath="$PROJECT_DIR$/ItemHunter.iml" />
       <module fileurl="file://$PROJECT_DIR$/ItemHunter/ItemHunter-ItemHunter.iml" filepath="$PROJECT_DIR$/ItemHunter/ItemHunter-ItemHunter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/countryPicker/countryPicker.iml" filepath="$PROJECT_DIR$/countryPicker/countryPicker.iml" />
     </modules>
   </component>
 </project>

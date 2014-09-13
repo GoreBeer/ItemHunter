@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/ItemHunter" />
+            <option value="$PROJECT_DIR$/countryPicker" />
           </set>
         </option>
       </GradleProjectSettings>

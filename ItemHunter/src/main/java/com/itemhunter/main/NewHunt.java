@@ -24,6 +24,7 @@ import java.util.Arrays;
  * Created by Kyle on 9/09/2014.
  */
 public class NewHunt extends ActionBarActivity {
+    //TODO - Maybe change this into a SortedSet or similar so that duplicate values won't be added.  Always save the list on app shutdown
     protected ArrayList<String> locations;
 
     @Override

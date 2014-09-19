@@ -8,11 +8,11 @@ import java.util.concurrent.TimeUnit;
 import com.itemhunter.objects.GenericHunt;
 
     /**
-     * Huntholder provides the main functionality for the
+     * Huntholder provides the main functionality for firing hunts
      */
 
 public class HuntHolder {
-	
+	//TODO - Set as singleton pattern
 	protected ArrayList<GenericHunt> pingsHolder;	
 	protected ScheduledExecutorService scheduledThreadPool;
 	
@@ -36,6 +36,7 @@ public class HuntHolder {
 	
 	//use this to set new Pings
 	public boolean setPingTimer(GenericHunt ping){
+        pingsHolder.add(ping);
 		long pingFreq = ping.getPingFrequency();
 		scheduledThreadPool.scheduleAtFixedRate(ping, pingFreq, pingFreq, TimeUnit.SECONDS);
 		return false; //true if works, false if not

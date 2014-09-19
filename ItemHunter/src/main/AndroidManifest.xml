@@ -29,7 +29,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"></action>
             </intent-filter>
-            </activity>
+        </activity>
+        <activity
+            android:name=".CreateHuntName"
+            android:label="CreateHuntName"
+            android:theme="@android:style/Theme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"></action>
+            </intent-filter>
+        </activity>
 
     </application>
 

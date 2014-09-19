@@ -37,11 +37,15 @@
     <string name="fixed_price">Fixed Price</string>
     <string name="auction">Auction</string>
     <string name="wifi_true">True</string>
+    <string name="name_your_hunt">Name Your Hunt</string>
+    <string name="cancel">Cancel</string>
 
     <string-array name="websites">
         <item>Ebay</item>
         <item>Amazon</item>
         <item>Both</item>
     </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -68,7 +68,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/price"
+        android:id="@+id/maxPrice"
         android:layout_alignBottom="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
         android:layout_marginLeft="2dp"
@@ -84,7 +84,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/maximum"
         android:id="@+id/textView5"
-        android:layout_alignBottom="@+id/price"
+        android:layout_alignBottom="@+id/maxPrice"
         android:layout_marginLeft="6dp"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp" />
@@ -96,8 +96,8 @@
         android:layout_alignTop="@+id/textView6"
         android:layout_toRightOf="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
-        android:layout_alignRight="@+id/price"
-        android:layout_alignEnd="@+id/price" />
+        android:layout_alignRight="@+id/maxPrice"
+        android:layout_alignEnd="@+id/maxPrice" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -126,8 +126,8 @@
         android:id="@+id/locationspin"
         android:layout_toStartOf="@+id/textView5"
         android:layout_alignTop="@+id/textView7"
-        android:layout_alignLeft="@+id/price"
-        android:layout_alignStart="@+id/price" />
+        android:layout_alignLeft="@+id/maxPrice"
+        android:layout_alignStart="@+id/maxPrice" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -174,7 +174,7 @@
         android:layout_height="wrap_content"
         android:fillViewport="true"
         android:layout_below="@+id/textView8"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/cancel"
         android:layout_marginTop="5dp"
         android:id="@+id/moreOptsScroll"
         android:visibility="gone">
@@ -193,7 +193,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/price_text"
             android:id="@+id/textView9"
-            android:layout_alignBottom="@+id/editText"
+            android:layout_alignBottom="@+id/minPrice"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="false"
             android:layout_marginLeft="10dp" />
@@ -212,7 +212,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:id="@+id/minPrice"
             android:layout_toEndOf="@+id/textView10"
             android:maxLines="1"
             android:maxLength="11"
@@ -228,7 +228,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/minimum"
             android:id="@+id/textView11"
-            android:layout_alignBottom="@+id/editText"
+            android:layout_alignBottom="@+id/minPrice"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="10dp"
@@ -251,7 +251,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/auction"
-            android:id="@+id/radioButton"
+            android:id="@+id/auctionRadio"
             android:layout_toEndOf="@+id/textView12"
             android:textSize="12sp"
             android:layout_alignTop="@+id/textView12"
@@ -264,12 +264,12 @@
             android:text="@string/fixed_price"
             android:id="@+id/radioButton3"
             android:textSize="12sp"
-            android:layout_toEndOf="@+id/radioButton"
+            android:layout_toEndOf="@+id/auctionRadio"
             android:checked="false"
             android:enabled="true"
             android:layout_above="@+id/textView13"
-            android:layout_alignRight="@+id/editText"
-            android:layout_alignEnd="@+id/editText" />
+            android:layout_alignRight="@+id/minPrice"
+            android:layout_alignEnd="@+id/minPrice" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -277,7 +277,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/pingEvery"
             android:id="@+id/textView13"
-            android:layout_below="@+id/radioButton"
+            android:layout_below="@+id/auctionRadio"
             android:layout_alignLeft="@+id/textView12"
             android:layout_alignStart="@+id/textView12"
             android:layout_marginTop="10dp" />
@@ -292,7 +292,7 @@
             android:maxLines="1"
             android:maxLength="3"
             android:layout_alignBottom="@+id/textView13"
-            android:layout_alignEnd="@+id/radioButton" />
+            android:layout_alignEnd="@+id/auctionRadio" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -366,7 +366,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home"
-        android:id="@+id/button2"
+        android:id="@+id/cancel"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -383,5 +383,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="2dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:onClick="callHuntNamer" />
 </RelativeLayout>

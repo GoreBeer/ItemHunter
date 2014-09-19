@@ -38,8 +38,9 @@ public class GenericHunt implements Runnable {
 		this.pingFrequency = pingFrequency;
 		
 		//Optional or has a default value
-		this.priceMin = priceMin;
+		this.priceMin = priceMin; //defaults to 0
 		this.searchType = searchType; //defaults to 1
+        this.notificationType = notificationType; //defaults to true
 		this.pingConnectionType = pingConnectionType; //defaults to 1
 		
 		//Initialise the listings array here

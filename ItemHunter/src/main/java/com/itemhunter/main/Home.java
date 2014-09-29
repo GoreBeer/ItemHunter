@@ -54,7 +54,7 @@ public class Home extends ActionBarActivity {
             editor.putString(AppConstants.LOCATIONS, "World|Australia|New Zealand");
             //TODO - Call to run a popup asking user for location
 
-        editor.commit();
+        editor.apply();
     }
 
     public void goOptions(View view){

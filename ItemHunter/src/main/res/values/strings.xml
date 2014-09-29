@@ -39,6 +39,7 @@
     <string name="wifi_true">True</string>
     <string name="name_your_hunt">Name Your Hunt</string>
     <string name="cancel">Cancel</string>
+    <string name="buy">Buy</string>
 
     <string-array name="websites">
         <item>Ebay</item>

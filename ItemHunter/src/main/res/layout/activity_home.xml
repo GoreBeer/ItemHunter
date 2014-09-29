@@ -9,12 +9,6 @@
     tools:context="com.itemhunter.main.Home"
     android:id="@+id/home_layout">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,16 +17,36 @@
         android:onClick="goOptions"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/spinner" />
 
-    <Button
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_hunt"
-        android:id="@+id/newHuntButt"
-        android:layout_below="@+id/profileButt"
-        android:layout_alignRight="@+id/profileButt"
-        android:layout_alignEnd="@+id/profileButt"
-        android:onClick="goNewHunt" />
+        android:id="@+id/spinner"
+        android:layout_toLeftOf="@+id/profileButt"
+        android:layout_toRightOf="@+id/newBut"
+        android:layout_toEndOf="@+id/newBut"
+        android:layout_alignBottom="@+id/newBut" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemsList"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profileButt" />
+
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/newBut"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:cropToPadding="false"
+        android:background="@drawable/plussign"
+        android:onClick="goNewHunt"
+        android:contentDescription="new hunt" />
 
 </RelativeLayout>

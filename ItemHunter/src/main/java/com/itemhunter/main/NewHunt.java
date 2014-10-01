@@ -170,9 +170,10 @@ public class NewHunt extends ActionBarActivity {
         GenericHunt newHunt = new GenericHunt("newhunt", search, 0, Double.parseDouble(maxPrice), bang,locations, true, pingFreq,
                 true, true);
 
+        //TODO - Need to pass huntholder to this class on init, then no need for context or to make it a singleton
         //Add to main holder and set ping timer
-        HuntHolder hunt = new HuntHolder();
-        hunt.setPingTimer(newHunt);
+        //HuntHolder hunt = new HuntHolder();
+       // hunt.setHuntTimer(newHunt);
         dialog.hide();
         //TODO - Send user back to home screen after?
     }

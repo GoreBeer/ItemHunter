@@ -1,44 +1,50 @@
  	package com.itemhunter.huntfunc;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.itemhunter.objects.GenericHunt;
+import com.itemhunter.sqlite.DatabaseHelper;
 
     /**
      * Huntholder provides the main functionality for firing hunts
      */
 
 public class HuntHolder {
-	//TODO - Set as singleton pattern
-	protected ArrayList<GenericHunt> pingsHolder;	
+    protected ArrayList<GenericHunt> huntsHolder;
 	protected ScheduledExecutorService scheduledThreadPool;
 	
-	//protected CustomContentProvider dbAccessor;
+	protected DatabaseHelper dbAccessor;
 	
-	public HuntHolder(){
-		this.pingsHolder = new ArrayList<GenericHunt>();
+	public HuntHolder(Context context){
+        dbAccessor = new DatabaseHelper(context);
+        //Loads the current pings to immediately start the thread scheduler
+        this.huntsHolder = dbAccessor.getCurrentPings();
+        System.out.println("Hunts loaded. huntsHolder contains "+huntsHolder.size()+" hunts");
 
-		//this is the initial loader.  May need to move to its own method if we want to load more stuff
-		//pingsHolder.add(dbAccessor.retrieveCurrentPings());
-		scheduledThreadPool = Executors.newScheduledThreadPool(this.pingsHolder.size());
-		setPingTimer(this.pingsHolder);		
+        //Creates the scheduled thread pool with the pings retrieved from db
+		scheduledThreadPool = Executors.newScheduledThreadPool(this.huntsHolder.size());
+
+        //makes a call to method that sets each hunt's timer
+		setHuntTimer(this.huntsHolder);
 	}
 	
 	//use this one on initial load
-	private void setPingTimer(ArrayList<GenericHunt> pings) {		
-		for(GenericHunt ping: pings){
-			setPingTimer(ping);
+	private void setHuntTimer(ArrayList<GenericHunt> hunts) {
+		for(GenericHunt hunt: hunts){
+            setHuntTimer(hunt);
 		}
 	}
 	
 	//use this to set new Pings
-	public boolean setPingTimer(GenericHunt ping){
-        pingsHolder.add(ping);
-		long pingFreq = ping.getPingFrequency();
-		scheduledThreadPool.scheduleAtFixedRate(ping, pingFreq, pingFreq, TimeUnit.SECONDS);
+	public boolean setHuntTimer(GenericHunt hunt){
+        huntsHolder.add(hunt);
+		long huntFreq = hunt.getHuntFrequency();
+		scheduledThreadPool.scheduleAtFixedRate(hunt, huntFreq, huntFreq, TimeUnit.SECONDS);
 		return false; //true if works, false if not
 	}
 	
@@ -54,4 +60,7 @@ public class HuntHolder {
 		return false; //true if works, false if not
 	}
 
+    public ArrayList<GenericHunt> getHuntsHolder(){
+        return this.huntsHolder;
+    }
 }

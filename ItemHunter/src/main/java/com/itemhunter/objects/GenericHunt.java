@@ -14,10 +14,10 @@ public class GenericHunt implements Runnable {
 	protected ArrayList<String> websites;	
 	protected ArrayList<String> locations;
 	//This value will only be passed into the APIs that require/can use it.  Else default to false
-	protected boolean searchType; // 0 = fixed, 1 = other/all/auction	
-	protected long pingFrequency; //All values converted to minutes so long is probably best	
+	protected boolean searchType; // 0(false) = fixed, 1(true) = other/all/auction
+	protected long huntFrequency; //All values converted to minutes so long is probably best
 	protected boolean notificationType; // 0 = push, 1 = email	
-	protected boolean pingConnectionType; // 0 = wifi only, 1 = all	
+	protected boolean huntConnectionType; // 0 = wifi only, 1 = all
 	protected ArrayList<Listing> listings;	
 	protected WebSearch searchEngine;
 	
@@ -26,8 +26,8 @@ public class GenericHunt implements Runnable {
 	}	
 	
 	public GenericHunt(String title, String query, double priceMin, double priceMax, ArrayList<String> websites, 
-	ArrayList<String> locations, boolean searchType, long pingFrequency, boolean notificationType, 
-	boolean pingConnectionType)
+	ArrayList<String> locations, boolean searchType, long huntFrequency, boolean notificationType,
+	boolean huntConnectionType)
 	{
 		//Required - Will be checked in the UI for null/empty values
 		this.title = title;
@@ -35,13 +35,13 @@ public class GenericHunt implements Runnable {
 		this.priceMax = priceMax;
 		this.websites = websites;
 		this.locations = locations;
-		this.pingFrequency = pingFrequency;
+		this.huntFrequency = huntFrequency;
 		
 		//Optional or has a default value
 		this.priceMin = priceMin; //defaults to 0
 		this.searchType = searchType; //defaults to 1
         this.notificationType = notificationType; //defaults to true
-		this.pingConnectionType = pingConnectionType; //defaults to 1
+		this.huntConnectionType = huntConnectionType; //defaults to 1
 		
 		//Initialise the listings array here
 		this.listings = new ArrayList<Listing>();
@@ -100,7 +100,7 @@ public class GenericHunt implements Runnable {
 		this.locations = locations;
 	}
 
-	public boolean isSearchType() {
+	public boolean getSearchType() {
 		return searchType;
 	}
 
@@ -108,15 +108,15 @@ public class GenericHunt implements Runnable {
 		this.searchType = searchType;
 	}
 
-	public long getPingFrequency() {
-		return pingFrequency;
+	public long getHuntFrequency() {
+		return huntFrequency;
 	}
 
-	public void setPingFrequency(long pingFrequency) {
-		this.pingFrequency = pingFrequency;
+	public void setHuntFrequency(long huntFrequency) {
+		this.huntFrequency = huntFrequency;
 	}
 
-	public boolean isNotificationType() {
+	public boolean getNotificationType() {
 		return notificationType;
 	}
 
@@ -124,12 +124,12 @@ public class GenericHunt implements Runnable {
 		this.notificationType = notificationType;
 	}
 
-	public boolean isPingConnectionType() {
-		return pingConnectionType;
+	public boolean getHuntConnectionType() {
+		return huntConnectionType;
 	}
 
-	public void setPingConnectionType(boolean pingConnectionType) {
-		this.pingConnectionType = pingConnectionType;
+	public void setHuntConnectionType(boolean huntConnectionType) {
+		this.huntConnectionType = huntConnectionType;
 	}
 
 	public ArrayList<Listing> getListings() {

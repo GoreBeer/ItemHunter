@@ -2,32 +2,54 @@ package com.itemhunter.main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.itemhunter.huntfunc.HuntHolder;
 import com.itemhunter.objects.GenericHunt;
+import com.itemhunter.objects.Listing;
 import com.itemhunter.sqlite.AppConstants;
+import com.itemhunter.utils.ListingAdapter;
 
 import java.util.ArrayList;
 
 
 public class Home extends ActionBarActivity {
 
+    ListingAdapter ad;
+    private HuntHolder newHolder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO - Future release investigate moving all these start up calls into their own thread
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        //TODO - Future release investigate moving all these start up calls into their own thread
+
+        //TODO - Remove to remove this, it's for testing
+        Listing listing = new Listing("16GB IPOD", 106.59, "Adelaide, South Australia", "EBAY", BitmapFactory.decodeResource(getResources(), R.drawable.closesign));
+        Listing listing1 = new Listing("64GB IPAD Mini", 799.93, "Ocean Grove, Victoria", "EBAY", BitmapFactory.decodeResource(getResources(), R.drawable.plussign));
+        GenericHunt huntTest = new GenericHunt();
+        huntTest.getListings().add(listing);
+        huntTest.getListings().add(listing1);
+        huntTest.getListings().add(listing);
+        huntTest.getListings().add(listing1);
+        huntTest.getListings().add(listing);
+        huntTest.getListings().add(listing1);
+        huntTest.getListings().add(listing);
+        huntTest.getListings().add(listing1);
 
         //This sets up the item hunter main
-        HuntHolder newHolder = new HuntHolder(getApplicationContext());
-        System.out.println("HuntHolder initialized");
+        newHolder = new HuntHolder(getApplicationContext());
+        newHolder.getHuntsHolder().add(huntTest);
+
         ArrayList<String> huntNames = new ArrayList<String>();
         for(GenericHunt hunt : newHolder.getHuntsHolder()){
             huntNames.add(hunt.getTitle());
@@ -43,9 +65,14 @@ public class Home extends ActionBarActivity {
         adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapt);
 
+
         //TODO - Call method to add listing data to scrollList
+        ListView list = (ListView)findViewById(R.id.itemsList);
+        ad = new ListingAdapter(this, newHolder.getHuntsHolder().get(0).getListings(), getResources());
+        list.setAdapter(ad);
 
         checkLocations();
+        Log.v(AppConstants.TAG, "Home page instantiated");
     }
 
 

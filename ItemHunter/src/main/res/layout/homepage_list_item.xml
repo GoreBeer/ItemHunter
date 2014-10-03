@@ -65,7 +65,7 @@
     <ImageButton
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:id="@+id/newBut"
+        android:id="@+id/closeBut"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

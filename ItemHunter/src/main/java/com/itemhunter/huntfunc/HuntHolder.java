@@ -1,6 +1,7 @@
  	package com.itemhunter.huntfunc;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -8,6 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.itemhunter.objects.GenericHunt;
+import com.itemhunter.sqlite.AppConstants;
 import com.itemhunter.sqlite.DatabaseHelper;
 
     /**
@@ -15,37 +17,42 @@ import com.itemhunter.sqlite.DatabaseHelper;
      */
 
 public class HuntHolder {
+    //List of all saved hunts
     protected ArrayList<GenericHunt> huntsHolder;
+        //hunt firer
 	protected ScheduledExecutorService scheduledThreadPool;
-	
+    //access to the db
 	protected DatabaseHelper dbAccessor;
 	
 	public HuntHolder(Context context){
         dbAccessor = new DatabaseHelper(context);
         //Loads the current pings to immediately start the thread scheduler
         this.huntsHolder = dbAccessor.getCurrentPings();
-        System.out.println("Hunts loaded. huntsHolder contains "+huntsHolder.size()+" hunts");
+        Log.v(AppConstants.TAG, "Hunts loaded. huntsHolder contains " + this.huntsHolder.size() + " hunts");
 
         //Creates the scheduled thread pool with the pings retrieved from db
 		scheduledThreadPool = Executors.newScheduledThreadPool(this.huntsHolder.size());
 
         //makes a call to method that sets each hunt's timer
 		setHuntTimer(this.huntsHolder);
+        Log.v(AppConstants.TAG, "Huntholder has been initialized");
 	}
 	
-	//use this one on initial load
+	//use this one on initial load, convenience method
 	private void setHuntTimer(ArrayList<GenericHunt> hunts) {
+        //go through all hunt and set timer of each
 		for(GenericHunt hunt: hunts){
             setHuntTimer(hunt);
 		}
 	}
 	
 	//use this to set new Pings
-	public boolean setHuntTimer(GenericHunt hunt){
+	public void setHuntTimer(GenericHunt hunt){
+        //First add the hunt to the list of hunts
         huntsHolder.add(hunt);
+        //TODO - Add hunt to database here
 		long huntFreq = hunt.getHuntFrequency();
 		scheduledThreadPool.scheduleAtFixedRate(hunt, huntFreq, huntFreq, TimeUnit.SECONDS);
-		return false; //true if works, false if not
 	}
 	
 	/*	this is used to save the list to the db.  Such scenarios include:

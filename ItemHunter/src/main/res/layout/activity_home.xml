@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/HuntSpinner"
         android:layout_toLeftOf="@+id/profileButt"
-        android:layout_toRightOf="@+id/newBut"
-        android:layout_toEndOf="@+id/newBut"
-        android:layout_alignBottom="@+id/newBut" />
+        android:layout_toRightOf="@+id/closeBut"
+        android:layout_toEndOf="@+id/closeBut"
+        android:layout_alignBottom="@+id/closeBut" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
     <ImageButton
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:id="@+id/newBut"
+        android:id="@+id/closeBut"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

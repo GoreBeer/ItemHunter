@@ -22,7 +22,9 @@ public class GenericHunt implements Runnable {
 	protected WebSearch searchEngine;
 	
 	public GenericHunt(){
-		//empty constructor
+        //TODO - For testing, remove when done
+		listings = new ArrayList<Listing>();
+        title = "Test Hunt";
 	}	
 	
 	public GenericHunt(String title, String query, double priceMin, double priceMax, ArrayList<String> websites, 

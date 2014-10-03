@@ -12,6 +12,7 @@ public class AppConstants {
 	public static final String LOG = "DatabaseHelper";
 	public static final int DATABASE_VERSION = 1;
 	public static final String DATABASE_NAME = "ITEM_HUNTER";
+    public static final String TAG = "ItemHunter";
 	
 	//common column names
 	public static final String KEY_ID = "id";

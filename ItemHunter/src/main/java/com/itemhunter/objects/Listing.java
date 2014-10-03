@@ -13,7 +13,7 @@ public class Listing {
 	protected String location;
 	
 	protected String website;
-	
+	//TODO - Might need to store this as a Drawable (convert from and to Bitmap before putting in db)
 	protected Bitmap picture;
 	
 	public Listing(){
@@ -49,4 +49,9 @@ public class Listing {
 	public Bitmap getPicture() {
 		return picture;
 	}
+
+    @Override
+    public String toString(){
+        return "Title: "+ this.title +" | Price: " + this.price + " | Location: " + this.location + " | Website: " + this.website;
+    }
 }

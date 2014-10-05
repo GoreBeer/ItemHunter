@@ -35,7 +35,8 @@
         android:id="@+id/itemsList"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/profileButt" />
+        android:layout_below="@+id/profileButt"
+        android:layout_alignParentEnd="true" />
 
     <ImageButton
         android:layout_width="35dp"

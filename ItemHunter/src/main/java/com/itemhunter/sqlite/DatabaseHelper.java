@@ -1,11 +1,14 @@
 package com.itemhunter.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.itemhunter.objects.GenericHunt;
+import com.itemhunter.utils.Parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +21,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
 		db.execSQL(AppConstants.CREATE_SQL_TABLE_PROFILE);
 		db.execSQL(AppConstants.CREATE_SQL_TABLE_HUNTS);
 		db.execSQL(AppConstants.CREATE_SQL_TABLE_LISTINGS);
@@ -26,13 +28,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
+
 	}
 
     /*
      * Created as a getter method for the pings list, used at startup only atm
      */
-    public ArrayList<GenericHunt> getCurrentPings(){
+    public ArrayList<GenericHunt> getCurrentHunts(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<GenericHunt> hunts = new ArrayList<GenericHunt>();
         Cursor cursor = db.rawQuery(AppConstants.SELECT_ALL_HUNTS, null);
@@ -43,11 +45,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 hunt.setQuery(cursor.getString(cursor.getColumnIndex(AppConstants.QUERYNAME)));
                 hunt.setPriceMin(cursor.getDouble(cursor.getColumnIndex(AppConstants.PRICEMIN)));
                 hunt.setPriceMax(cursor.getDouble(cursor.getColumnIndex(AppConstants.PRICEMAX)));
-                //TODO - Better way to store a list of countries and websites in db (string manipulation seems wrong)
+                //TODO - Store lists in db as JSON objects
                 String webs = cursor.getString(cursor.getColumnIndex(AppConstants.WEBSITESTRING));
-                hunt.setWebsites(new ArrayList<String>(Arrays.asList(webs.split("\\|"))));
+                hunt.setWebsites(Parser.deTokifier(webs));
                 String locs = cursor.getString(cursor.getColumnIndex(AppConstants.COUNTRIESTRING));
-                hunt.setLocations(new ArrayList<String>(Arrays.asList(locs.split("\\|"))));
+                hunt.setLocations(Parser.deTokifier(locs));
                 hunt.setSearchType(cursor.getInt(cursor.getColumnIndex(AppConstants.SEARCHTYPE)) != 0);
                 hunt.setHuntFrequency(cursor.getLong(cursor.getColumnIndex(AppConstants.HUNTFREQUENCY)));
                 hunt.setNotificationType(cursor.getInt(cursor.getColumnIndex(AppConstants.NOTIFICATIONTYPE)) != 0);
@@ -63,6 +65,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return hunts;
     }
 
+    public void addHunt(GenericHunt hunt){
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+        values.put(AppConstants.TITLE, hunt.getTitle());
+        values.put(AppConstants.QUERYNAME, hunt.getQuery());
+        values.put(AppConstants.PRICEMIN, Double.toString(hunt.getPriceMin()));
+        values.put(AppConstants.PRICEMAX, Double.toString(hunt.getPriceMax()));
+        values.put(AppConstants.WEBSITESTRING, Parser.reTokifier(hunt.getWebsites()));
+        values.put(AppConstants.COUNTRIESTRING, Parser.reTokifier(hunt.getLocations()));
+        values.put(AppConstants.SEARCHTYPE, hunt.getSearchType() == false ? 0 : 1);
+        values.put(AppConstants.HUNTFREQUENCY, hunt.getHuntFrequency());
+        values.put(AppConstants.NOTIFICATIONTYPE, hunt.getNotificationType() == false ? 0 : 1);
+        values.put(AppConstants.HUNTCONNECTIONTYPE, hunt.getHuntConnectionType() == false ? 0 : 1);
+
+        Log.i(AppConstants.TAG, "Inserting new hunt into db");
+        db.insert(AppConstants.HUNTS, null, values);
+    }
 
 }

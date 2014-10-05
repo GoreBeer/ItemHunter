@@ -93,7 +93,8 @@ public class ListingAdapter extends BaseAdapter implements View.OnClickListener 
         else{
             tempvalues = null;
             tempvalues = (Listing)data.get(position);
-            //TODO - Set listing image and set
+            //TODO - set check for ebay or amazon and display image from resources
+            holder.itemImg.setBackground(new BitmapDrawable(null, tempvalues.getPicture()));
             holder.titleText.setText(tempvalues.getTitle());
             holder.priceText.setText(Double.toString(tempvalues.getPrice()));
             holder.locationText.setText(tempvalues.getLocation());

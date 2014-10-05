@@ -25,6 +25,7 @@ public class AppConstants {
 	
 	//Hunts table
 	public static final String HUNTS = "hunts";
+    public static final String TITLE = "title";
 	public static final String QUERYNAME = "query";
 	public static final String PRICEMIN = "price_min";
 	public static final String PRICEMAX = "price_max";
@@ -34,19 +35,18 @@ public class AppConstants {
 	public static final String HUNTFREQUENCY = "hunt_frequency";
 	public static final String NOTIFICATIONTYPE = "notification_type";
 	public static final String HUNTCONNECTIONTYPE = "hunt_conn_type";
-	public static final String LISTINGKEY = "listing_key"; //this is the FK in the listings table
-    //TODO - Is this missing the hunt name field?  queryname = the query string itself, but where is the hunt name
 
 		
 	//Listings table 
 	public static final String LISTINGS = "listings";
-	public static final String TITLE = "title";
+	//TITLE is here but it's defined above in Hunts
 	public static final String PRICE = "price";
 	public static final String LOCATION = "location";
 	public static final String WEBSITE = "website";
 	public static final String PICTUREHASH = "picturehash";
+    public static final String HUNTKEY = "huntkey";
 	public static final String DATETIME = "datetime";
-	//TODO - Also a listingkey which matches each hunt.  1 Hunt can have many listings, should we use the key_id here instead (the auto integer key)
+
 	
 	public static final String TOTAL_COUNT_LISTINGS = "SELECT COUNT(*) FROM " + LISTINGS; //Used for capping
 	
@@ -55,13 +55,13 @@ public class AppConstants {
 			+ USERNAME + " TEXT UNIQUE, " + PASSHASH + " TEXT, " + EMAIL + " TEXT" + ")";
 	
 	public static final String CREATE_SQL_TABLE_HUNTS = "CREATE TABLE " + HUNTS + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
-			+ QUERYNAME + " TEXT, " + PRICEMIN + " INTEGER, " + PRICEMAX + " INTEGER, " + WEBSITESTRING + " TEXT, " 
+			+ TITLE + "TEXT, " + QUERYNAME + " TEXT, " + PRICEMIN + " INTEGER, " + PRICEMAX + " INTEGER, " + WEBSITESTRING + " TEXT, "
 			+ COUNTRIESTRING + " TEXT, " + SEARCHTYPE + " INTEGER, " + HUNTFREQUENCY + " INTEGER, " + NOTIFICATIONTYPE
-			+ " INTEGER, " + HUNTCONNECTIONTYPE + " INTEGER, " + LISTINGKEY + " INTEGER" + ")";
+			+ " INTEGER, " + HUNTCONNECTIONTYPE + " INTEGER" + ")";
 	
 	public static final String CREATE_SQL_TABLE_LISTINGS = "CREATE TABLE " + LISTINGS + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
-			+ TITLE + " TEXT, " + PRICE + " INTEGER, " + LOCATION + " TEXT, " + WEBSITE + " TEXT, " + PICTUREHASH + " TEXT, " + 
-			LISTINGKEY + " TEXT, " + "DATETIME" + " TEXT" + ")";
+			+ TITLE + " TEXT, " + PRICE + " INTEGER, " + LOCATION + " TEXT, " + WEBSITE + " TEXT, " + PICTUREHASH + " TEXT, " +
+            HUNTKEY + " TEXT, " + DATETIME + " TEXT" + ")";
 	
 	//Table Drops
 	public static final String DROP_SQL_TABLE_PROFILE = "DROP TABLE IF EXISTS " + PROFILES;

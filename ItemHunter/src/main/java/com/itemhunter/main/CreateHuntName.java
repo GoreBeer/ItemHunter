@@ -3,8 +3,12 @@ package com.itemhunter.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+
+import com.itemhunter.sqlite.AppConstants;
 
 /**
  * Created by Kyle on 18/09/2014.
@@ -29,7 +33,20 @@ public class CreateHuntName extends ActionBarActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    //Cancel dialog
     public void cancelDialog(View view){
-        Intent intent = new Intent(this, NewHunt.class);
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
+    }
+
+    //Create button new hunt dialog
+    public void createHunt(View view){
+        Intent intent = new Intent();
+        EditText titleText = (EditText) findViewById(R.id.hunt_name);
+        Log.i(AppConstants.TAG, "Title text is: " + titleText.getText().toString());
+        intent.putExtra(AppConstants.TITLE, titleText.getText().toString());
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

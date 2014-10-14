@@ -9,14 +9,14 @@ public class GenericHunt implements Runnable {
 	protected long id; //This will be used when the db is implemented to allow changes to the db	
 	protected String title;	
 	protected String query;	
-	protected double priceMin;	
+	protected double priceMin; //Default is 0
 	protected double priceMax;	
-	protected ArrayList<String> websites;	
-	protected ArrayList<String> locations;
-	//This value will only be passed into the APIs that require/can use it.  Else default to false
-	protected boolean searchType; // 0(false) = fixed, 1(true) = other/all/auction
-	protected long huntFrequency; //All values converted to minutes so long is probably best
-	protected boolean notificationType; // 0 = push, 1 = email	
+	protected String website; //TODO - in the future this can be multiple websites
+	protected String location; //TODO - in the future this can be multiple countries
+
+	protected boolean searchType; // 0(false) = fixed, 1(true) = auction. Default is fixed.
+	protected long huntFrequency; //Default is 0 and measured in minutes
+	protected boolean notificationType; // 0 = push, 1 = email	//TODO - FUTURE this should be multi-choice
 	protected boolean huntConnectionType; // 0 = wifi only, 1 = all
 	protected ArrayList<Listing> listings;	
 	protected WebSearch searchEngine;
@@ -27,16 +27,16 @@ public class GenericHunt implements Runnable {
         title = "Test Hunt";
 	}	
 	
-	public GenericHunt(String title, String query, double priceMin, double priceMax, ArrayList<String> websites, 
-	ArrayList<String> locations, boolean searchType, long huntFrequency, boolean notificationType,
+	public GenericHunt(String title, String query, double priceMin, double priceMax, String website, 
+	String location, boolean searchType, long huntFrequency, boolean notificationType,
 	boolean huntConnectionType)
 	{
 		//Required - Will be checked in the UI for null/empty values
 		this.title = title;
 		this.query = query;
 		this.priceMax = priceMax;
-		this.websites = websites;
-		this.locations = locations;
+		this.website = website;
+		this.location = location;
 		this.huntFrequency = huntFrequency;
 		
 		//Optional or has a default value
@@ -86,20 +86,20 @@ public class GenericHunt implements Runnable {
 		this.priceMax = priceMax;
 	}
 
-	public ArrayList<String> getWebsites() {
-		return websites;
+	public String getWebsite() {
+		return website;
 	}
 
-	public void setWebsites(ArrayList<String> websites) {
-		this.websites = websites;
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
-	public ArrayList<String> getLocations() {
-		return locations;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setLocations(ArrayList<String> locations) {
-		this.locations = locations;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public boolean getSearchType() {

@@ -217,8 +217,8 @@
             android:inputType="text"
             android:layout_toStartOf="@+id/textView11"
             android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/editText2"
-            android:layout_alignStart="@+id/editText2" />
+            android:layout_alignLeft="@+id/pingFreText"
+            android:layout_alignStart="@+id/pingFreText" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -260,10 +260,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fixed_price"
-            android:id="@+id/radioButton3"
+            android:id="@+id/fixedRadio"
             android:textSize="12sp"
             android:layout_toEndOf="@+id/auctionRadio"
-            android:checked="false"
+            android:checked="true"
             android:enabled="true"
             android:layout_above="@+id/textView13"
             android:layout_alignEnd="@+id/minPrice" />
@@ -282,7 +282,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2"
+            android:id="@+id/pingFreText"
             android:layout_toEndOf="@+id/textView13"
             android:width="150dp"
             android:inputType="number"
@@ -299,7 +299,7 @@
             android:id="@+id/textView14"
             android:textSize="12sp"
             android:layout_alignBottom="@+id/textView13"
-            android:layout_alignStart="@+id/radioButton3"
+            android:layout_alignStart="@+id/fixedRadio"
             android:layout_marginLeft="10dp" />
 
         <TextView
@@ -318,7 +318,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/push"
-            android:id="@+id/radioButton4"
+            android:id="@+id/pushRadio"
             android:layout_toEndOf="@+id/textView15"
             android:textSize="12sp"
             android:layout_alignBottom="@+id/textView15"
@@ -329,11 +329,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/email"
-            android:id="@+id/radioButton5"
-            android:layout_toEndOf="@+id/radioButton4"
+            android:id="@+id/emailRadio"
+            android:layout_toEndOf="@+id/pushRadio"
             android:textSize="12sp"
-            android:layout_toRightOf="@+id/radioButton4"
-            android:layout_alignBottom="@+id/radioButton4" />
+            android:layout_toRightOf="@+id/pushRadio"
+            android:layout_alignBottom="@+id/pushRadio" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -350,9 +350,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/wifi_true"
-            android:id="@+id/radioButton6"
+            android:id="@+id/wifiRadio"
             android:textSize="12sp"
-            android:layout_toStartOf="@+id/radioButton5"
+            android:layout_toStartOf="@+id/emailRadio"
             android:layout_below="@+id/textView15"
             android:layout_toRightOf="@+id/textView15"
             android:layout_toEndOf="@+id/textView15" />

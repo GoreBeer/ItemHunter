@@ -16,6 +16,20 @@ import com.itemhunter.sqlite.DatabaseHelper;
      * Huntholder provides the main functionality for firing hunts
      */
 public class HuntHolder {
+    //TODO - Everything needs logs and error checking
+
+    private Context context;
+    private static HuntHolder instance = null;
+    protected HuntHolder(){}
+
+
+    public static HuntHolder getInstance(){
+        if(instance == null){
+            instance = new HuntHolder();
+        }
+        return instance;
+    }
+
     //List of all saved hunts
     protected ArrayList<GenericHunt> huntsHolder;
         //hunt firer
@@ -23,7 +37,9 @@ public class HuntHolder {
     //access to the db
 	protected DatabaseHelper dbAccessor;
 	
-	public HuntHolder(Context context){
+	public void startHuntHolder(Context context){
+        //Sets the initial context
+        this.context = context;
         dbAccessor = new DatabaseHelper(context);
         //Loads the current pings to immediately start the thread scheduler
         this.huntsHolder = dbAccessor.getCurrentHunts();
@@ -61,5 +77,13 @@ public class HuntHolder {
 	
     public ArrayList<GenericHunt> getHuntsHolder(){
         return this.huntsHolder;
+    }
+
+    public Context getContext(){
+        return this.context;
+    }
+
+    public void setContext(Context context){
+        this.context = context;
     }
 }

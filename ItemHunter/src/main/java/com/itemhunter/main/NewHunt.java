@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,6 +27,7 @@ import com.countrypicker.CountryPicker;
 import com.itemhunter.huntfunc.HuntHolder;
 import com.itemhunter.objects.GenericHunt;
 import com.itemhunter.sqlite.AppConstants;
+import com.itemhunter.utils.Parser;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,12 +39,12 @@ import java.util.Date;
  * Created by Kyle on 9/09/2014.
  */
 public class NewHunt extends ActionBarActivity {
-    //TODO - Maybe change this into a SortedSet or similar so that duplicate values won't be added.  Always save the list on app shutdown
     protected ArrayList<String> locations;
-    protected Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO - Figure out radiobutton group in new hunt xml
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_hunt);
 
@@ -56,8 +59,13 @@ public class NewHunt extends ActionBarActivity {
         String locs = userpref.getString(AppConstants.LOCATIONS, "none");
 
         //Add user chosen locations to the spinner.  User location defaults to World if none are chosen.
-        locations = new ArrayList<String>(Arrays.asList(locs.split("\\|")));
-        System.out.println("Locations successfully split");
+        if(locs.equalsIgnoreCase("none")){
+            locations.add("World");
+        }
+        else {
+            locations = Parser.deTokifier(locs);
+        }
+
         Spinner spin = (Spinner)findViewById(R.id.locationspin);
         ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locations);
         adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -107,7 +115,7 @@ public class NewHunt extends ActionBarActivity {
                 //Grab userprefs for updating
                 SharedPreferences userpref = getSharedPreferences(AppConstants.USERPREFS, 0);
                 String locs = userpref.getString(AppConstants.LOCATIONS, "none");
-                //TODO - Check here for duplicates and stop the process if found
+
                 //Append the new country to the list
                 String newLocs = locs + "|"+name;
                 SharedPreferences.Editor edit = userpref.edit();
@@ -140,41 +148,60 @@ public class NewHunt extends ActionBarActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == 1){
-            if(resultCode == RESULT_OK){
-
-            }
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode == RESULT_OK){
+            createHunt(data.getStringExtra(AppConstants.TITLE));
         }
     }
 
     public void createHunt(String huntName){
-        //create vars
+
         //required vars
         EditText searchText = (EditText)findViewById(R.id.searchText);
         String search = searchText.getText().toString();
+
         EditText maxPriceText = (EditText)findViewById(R.id.maxPrice);
-        String maxPrice = maxPriceText.getText().toString();
+        String maxPriceCheck = maxPriceText.getText().toString();
+        double maxPrice = Double.parseDouble(maxPriceCheck);
+
+        Spinner locationSpin = (Spinner)findViewById(R.id.locationspin);
+        String location = locationSpin.getSelectedItem().toString();
+
         Spinner websiteSpin = (Spinner)findViewById(R.id.websitespin);
         String website = websiteSpin.getSelectedItem().toString();
 
         //check if optionals haves been selected
         EditText minPriceText = (EditText)findViewById(R.id.minPrice);
-        String minPrice = minPriceText.getText().toString();
-        if(!minPrice.trim().equalsIgnoreCase("")){
-
+        String minPriceCheck = minPriceText.getText().toString();
+        double minPrice = 0;
+        if(!minPriceCheck.trim().equalsIgnoreCase("")){
+            minPrice = Double.parseDouble(minPriceCheck);
         }
-        ArrayList<String> bang = new ArrayList<String>();
-        bang.add("Both");
-        long pingFreq = 300;
-        //create new object
-        GenericHunt newHunt = new GenericHunt("newhunt", search, 0, Double.parseDouble(maxPrice), bang,locations, true, pingFreq,
-                true, true);
 
-        //TODO - Need to pass huntholder to this class on init, then no need for context or to make it a singleton
-        //Add to main holder and set ping timer
-        //HuntHolder hunt = new HuntHolder();
-       // hunt.setHuntTimer(newHunt);
-        dialog.hide();
-        //TODO - Send user back to home screen after?
+        RadioButton aucRad = (RadioButton)findViewById(R.id.auctionRadio);
+        boolean searchType = aucRad.isChecked();
+
+        EditText huntFreqText = (EditText)findViewById(R.id.pingFreText);
+        long huntFreq = Long.parseLong(huntFreqText.getText().toString());
+
+        RadioButton emaRad = (RadioButton)findViewById(R.id.emailRadio);
+        boolean noteType = emaRad.isChecked();
+
+        RadioButton wifiRad = (RadioButton)findViewById(R.id.wifiRadio);
+        boolean wifiYes = wifiRad.isChecked();
+
+
+        //create new object
+        GenericHunt newHunt = new GenericHunt(huntName, search, minPrice, maxPrice, website, location, searchType, huntFreq,
+                noteType, wifiYes);
+
+        //This saves the hunt, starts its timer and adds it to the db
+        HuntHolder huntHolder = HuntHolder.getInstance();
+        huntHolder.setContext(getApplicationContext());
+        huntHolder.createHunt(newHunt);
+
+        //Takes user back to home screen when done
+        finish();
+
     }
 }

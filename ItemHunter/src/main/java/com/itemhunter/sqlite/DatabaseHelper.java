@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        //This method is called when the db version int changes
 	}
 
     /*
@@ -47,9 +47,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 hunt.setPriceMax(cursor.getDouble(cursor.getColumnIndex(AppConstants.PRICEMAX)));
                 //TODO - Store lists in db as JSON objects
                 String webs = cursor.getString(cursor.getColumnIndex(AppConstants.WEBSITESTRING));
-                hunt.setWebsites(Parser.deTokifier(webs));
+                hunt.setWebsite(webs);
                 String locs = cursor.getString(cursor.getColumnIndex(AppConstants.COUNTRIESTRING));
-                hunt.setLocations(Parser.deTokifier(locs));
+                hunt.setLocation(locs);
                 hunt.setSearchType(cursor.getInt(cursor.getColumnIndex(AppConstants.SEARCHTYPE)) != 0);
                 hunt.setHuntFrequency(cursor.getLong(cursor.getColumnIndex(AppConstants.HUNTFREQUENCY)));
                 hunt.setNotificationType(cursor.getInt(cursor.getColumnIndex(AppConstants.NOTIFICATIONTYPE)) != 0);
@@ -66,6 +66,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void addHunt(GenericHunt hunt){
+        /*
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor dbCursor = db.query(AppConstants.HUNTS, null, null, null, null, null, null);
+        String[] columnNames = dbCursor.getColumnNames();
+        for(String name : columnNames){
+            Log.v(AppConstants.TAG, "column name: "+ name);
+        }
+        */
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -73,8 +82,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(AppConstants.QUERYNAME, hunt.getQuery());
         values.put(AppConstants.PRICEMIN, Double.toString(hunt.getPriceMin()));
         values.put(AppConstants.PRICEMAX, Double.toString(hunt.getPriceMax()));
-        values.put(AppConstants.WEBSITESTRING, Parser.reTokifier(hunt.getWebsites()));
-        values.put(AppConstants.COUNTRIESTRING, Parser.reTokifier(hunt.getLocations()));
+        values.put(AppConstants.WEBSITESTRING, hunt.getWebsite());
+        values.put(AppConstants.COUNTRIESTRING, hunt.getLocation());
         values.put(AppConstants.SEARCHTYPE, hunt.getSearchType() == false ? 0 : 1);
         values.put(AppConstants.HUNTFREQUENCY, hunt.getHuntFrequency());
         values.put(AppConstants.NOTIFICATIONTYPE, hunt.getNotificationType() == false ? 0 : 1);
@@ -83,5 +92,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.i(AppConstants.TAG, "Inserting new hunt into db");
         db.insert(AppConstants.HUNTS, null, values);
     }
-
 }
